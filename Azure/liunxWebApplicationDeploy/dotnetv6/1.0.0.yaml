@@ -11,7 +11,6 @@ parameters:
 - name: projectOutputPath
   displayName: Project Output Path
   type: string
-  default: '$(Build.ArtifactStagingDirectory)/${{ parameters.projectPath }}'
 
 - name: webApplicationResourceName
   displayName: Web Application Resource Name

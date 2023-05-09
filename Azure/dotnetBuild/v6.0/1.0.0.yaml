@@ -2,7 +2,7 @@ parameters:
 - name: projectName
   displayName: Project Name
   type: string
-  
+
 - name: projectPath
   displayName: Project Path
   type: string
@@ -11,7 +11,6 @@ parameters:
 - name: projectOutputPath
   displayName: Project Output Path
   type: string
-  default: '$(Build.ArtifactStagingDirectory)/${{ parameters.projectPath }}'
 
 steps:
 - task: NuGetToolInstaller@1
