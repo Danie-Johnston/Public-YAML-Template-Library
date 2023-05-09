@@ -1,0 +1,35 @@
+parameters:
+- name: projectName
+  displayName: Project Name
+  type: string
+- name: projectPath
+  displayName: Project Path
+  type: string
+  default: '**'
+- name: projectOutputPath
+  displayName: Project Output Path
+  type: string
+  default: '$(Build.ArtifactStagingDirectory)/${{ parameters.projectPath }}'
+
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet >=6.3.0-0'
+  inputs:
+    versionSpec: '>=6.3.0-0'
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'Restore NuGet'
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project'
+  inputs:
+    command: publish
+    publishWebProjects: False
+    projects: '${{ parameters.projectPath }}/${{ parameters.projectName }}.csproj'
+    arguments: '--configuration Release --output "${{ parameters.projectOutputPath }}" /nowarn:CS8618;CS8600;CS8601;CS8602;CS8603;CS8604;CS8625;CS0649;CS0169'
+    zipAfterPublish: True

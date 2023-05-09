@@ -1,0 +1,37 @@
+parameters:
+- name: serviceConnectionName
+  displayName: Service Connection Name
+  type: string
+
+- name: projectName
+  displayName: Project Name
+  type: string
+  default: '**'
+
+- name: projectOutputPath
+  displayName: Project Output Path
+  type: string
+  default: '$(Build.ArtifactStagingDirectory)/${{ parameters.projectPath }}'
+
+- name: webApplicationResourceName
+  displayName: Web Application Resource Name
+  type: string
+
+
+steps:
+- task: AzureWebApp@1
+  displayName: 'Publish Web Application'
+  inputs:
+    azureSubscription: '${{ parameters.serviceConnectionName }}'
+    appType: 'webAppLinux'
+    appName: '${{ parameters.webApplicationResourceName }}'
+    package: '${{ parameters.serviceConnectionName }}/${{ parameters.projectName }}.zip'
+    configurationStrings: '-linuxFxVersion: DOTNETCORE|6.0'
+    deploymentMethod: 'auto'
+
+- task: AzureAppServiceManage@0
+  displayName: 'Restart Web Application ${{ parameters.webApplicationResourceName }}'
+  inputs:
+    azureSubscription: '${{ parameters.serviceConnectionName }}'
+    Action: 'Restart Azure App Service'
+    WebAppName: '${{ parameters.webApplicationResourceName }}'
