@@ -2,11 +2,9 @@ parameters:
 - name: projectName
   displayName: Project Name
   type: string
-
 - name: projectPath
   displayName: Project Path
   type: string
-
 - name: projectOutputPath
   displayName: Project Output Path
   type: string
