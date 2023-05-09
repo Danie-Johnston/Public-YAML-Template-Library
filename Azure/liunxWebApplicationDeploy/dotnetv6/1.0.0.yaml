@@ -23,7 +23,7 @@ steps:
     azureSubscription: '${{ parameters.serviceConnectionName }}'
     appType: 'webAppLinux'
     appName: '${{ parameters.webApplicationResourceName }}'
-    package: '${{ parameters.serviceConnectionName }}/${{ parameters.projectName }}.zip'
+    package: '${{ parameters.projectOutputPath }}/${{ parameters.projectName }}.zip'
     configurationStrings: '-linuxFxVersion: DOTNETCORE|6.0'
     deploymentMethod: 'auto'
 
