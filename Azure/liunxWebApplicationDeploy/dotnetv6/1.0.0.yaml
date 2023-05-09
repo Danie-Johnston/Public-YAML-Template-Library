@@ -6,7 +6,6 @@ parameters:
 - name: projectName
   displayName: Project Name
   type: string
-  default: '**'
 
 - name: projectOutputPath
   displayName: Project Output Path
