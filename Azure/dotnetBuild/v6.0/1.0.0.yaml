@@ -2,9 +2,11 @@ parameters:
 - name: projectName
   displayName: Project Name
   type: string
+  
 - name: projectPath
   displayName: Project Path
   type: string
+
 - name: projectOutputPath
   displayName: Project Output Path
   type: string
@@ -29,5 +31,5 @@ steps:
     command: publish
     publishWebProjects: False
     projects: '${{ parameters.projectPath }}/${{ parameters.projectName }}.csproj'
-    arguments: '--configuration Release --output "${{ parameters.projectOutputPath }}" /nowarn:CS8618;CS8600;CS8601;CS8602;CS8603;CS8604;CS8625;CS0649;CS0169'
+    arguments: '--configuration Release --output '${{ parameters.projectOutputPath }}' /nowarn:CS8618;CS8600;CS8601;CS8602;CS8603;CS8604;CS8625;CS0649;CS0169'
     zipAfterPublish: True

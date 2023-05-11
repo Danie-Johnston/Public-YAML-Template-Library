@@ -2,16 +2,18 @@ parameters:
 - name: serviceConnectionName
   displayName: Service Connection Name
   type: string
+
 - name: projectName
   displayName: Project Name
   type: string
+
 - name: projectOutputPath
   displayName: Project Output Path
   type: string
+
 - name: webApplicationResourceName
   displayName: Web Application Resource Name
   type: string
-
 
 steps:
 - task: AzureWebApp@1
