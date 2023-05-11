@@ -1,0 +1,15 @@
+parameters:
+- name: pathtoPublish
+  displayName: Path to Publish
+  type: string
+
+- name: artifactName
+  displayName: Artifact Name
+  type: string
+
+steps:
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    pathtoPublish: '${{ parameters.pathtoPublish }}'
+    artifactName: '${{ parameters.artifactName }}'

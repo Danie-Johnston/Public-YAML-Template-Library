@@ -1,0 +1,20 @@
+parameters:
+- name: targetFiles
+  displayName: Target Files
+  type: string
+
+- name: tokenPrefix
+  displayName: Token Prefix
+  type: string
+
+- name: tokenSuffix
+  displayName: Token Suffix
+  type: string
+
+steps:
+- task: replacetokens@3
+  inputs:
+    targetFiles: |
+      ${{ parameters.targetFiles }}
+    tokenPrefix: '${{ parameters.tokenPrefix }}'
+    tokenSuffix: '${{ parameters.tokenSuffix }}'

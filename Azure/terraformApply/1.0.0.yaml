@@ -1,0 +1,45 @@
+parameters:
+- name: servicePrincipalServiceConnectionName
+  displayName: Service Principal Service Connection Name
+  type: string
+
+- name: applicationRegistrationClientId
+  displayName: Application Registration Client Id
+  type: string
+
+- name: applicationRegistrationSecret
+  displayName: Application Registration Secret
+  type: string
+
+- name: applicationRegistrationTenantId
+  displayName: Application Registration Tenant Id
+  type: string
+
+- name: applicationRegistrationSubscriptionId
+  displayName: Application Registration Subscription Id
+  type: string
+
+- name: terraformWorkingDirectory
+  displayName: Terraform Working Directory
+  type: string
+
+- name: builtTerraformPlanLocation
+  displayName: Built Terraform Plan Location
+  type: string
+
+steps:
+- task: AzureCLI@2
+  displayName: 'Terraform Apply'
+  inputs:
+    azureSubscription:  '${{ parameters.servicePrincipalServiceConnectionName }}'
+    scriptType: bash
+    addSpnToEnvironment: true
+    workingDirectory: ${{ parameters.terraformWorkingDirectory }}
+    scriptLocation: inlineScript
+    inlineScript: |
+      export ARM_CLIENT_ID=${{ parameters.applicationRegistrationClientId }}
+      export ARM_CLIENT_SECRET=${{ parameters.applicationRegistrationSecret }}
+      export ARM_TENANT_ID=${{ parameters.applicationRegistrationTenantId }}
+      export ARM_SUBSCRIPTION_ID=${{ parameters.applicationRegistrationSubscriptionId }}
+      terraform init
+      terraform apply ${{ parameters.builtTerraformPlanLocation }}
